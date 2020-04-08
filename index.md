@@ -1,29 +1,40 @@
 ## Learning objective
 
-By completing this lab, you learn how to deploy a [deep learning microservice from the Model Asset Exchange](https://developer.ibm.com/series/create-model-asset-exchange/) on Red Hat OpenShift. Upon completion you know how to use the OpenShift web console or OpenShift Container Platform command-line interface (CLI) to:
+Data contains a wealth of information that can be used to solve certain types of problems. Traditional data analysis approaches, like a person manually inspecting the data or a specialized computer program that automates the human analysis, quickly reach their limits due to the amount of data to be analyzed or the complexity of the problem.
 
-* Deploy a model-serving microservice from a public container image on Docker Hub
+Machine learning, and deep learning, which is a specialized type of machine learning, uses algorithms – also known as ”models” - to identify patterns in the data. A trained model can be used to make predictions or decisions, and solve problems such as analyzing the content of text (spoken and written), images, audio, and video. For example, a model can be trained to identify objects in an image, sounds in a an audio or video file or summarize the the content in text form.
+
+![Identifying objects in an image using deep learning](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/deep_learning_example.png)
+
+The [Model Asset Exchange](https://developer.ibm.com/series/create-model-asset-exchange/) is a curated repository of ready-to-use state-of-the-art free and open source deep learning models, which can be deployed as microservice Docker images in local, hybrid, or cloud environments.
+
+By completing this quick lab, you learn how to use the OpenShift web console or OpenShift Container Platform command-line interface to:
+
+* Deploy a model-serving microservice using a public container image on Docker Hub
 * Create a route that exposes the microservice to the public
+
+For illustrative purposes you will deploy the Object Detector microservice and the Image Caption Generator microservice. 
 
 ## Prerequisites
 
 To follow this lab, you must have:
 
-* A web browser that is supported by the Skills Network Labs.
+* A web browser that is supported by the Skills Network Labs, such as the latest versions of Mozilla FireFox or Chrome.
 
 ## Estimated time
 
 It should take you approximately 20 minutes to complete this lab. The lab modules are:
 
-* [**Deploy a deep learning model-serving microservice on Red Hat OpenShift**](#deploy-a-deep-learning-model-serving-microservice-on-red-hat-openshift)
-  * [Deploy using the OpenShift Web Console](#deploy-using-the-openshift-web-console)
-  * [Deploy using the OpenShift Platform CLI](#deploy-using-the-cli)
+* [Deploy using the OpenShift Web Console](#deploy-using-the-openshift-web-console)
+* [Deploy using the OpenShift Platform CLI](#deploy-using-the-cli)
 
 ## Lab setup
 
-1. Open https://labs.cognitiveclass.ai/tools/theiaopenshift/. If required, log in.
+1. Connect to the [Skills Network Labs environment](https://labs.cognitiveclass.ai/tools/theiaopenshift/?md_instructions_url=https://raw.githubusercontent.com/IBM/max-model-prediction-os/master/index.md) using your web browser. If required, log in.
 
 1. Open a new terminal window (**Terminal** > **New Terminal**).
+
+   ![Skills Network Labs environment](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/snl_overview.png)
 
 1. Clone the lab repository by running the following command in the terminal window.
    ```
@@ -31,30 +42,27 @@ It should take you approximately 20 minutes to complete this lab. The lab module
    $ cd max-model-prediction-os
    ```
 
+   The cloned repository contains sample images and a few utility scripts.
+
 You are ready to start the lab.
-
-## Deploy a deep learning model-serving microservice on Red Hat OpenShift
-
-In this lab, you will deploy a model-serving microservice from the [Model Asset Exchange](https://developer.ibm.com/exchanges/models/) on Red Hat OpenShift using the [OpenShift web console](#deploy-using-the-openshift-web-console) or
-the [OpenShift Container Platform CLI](#deploy-using-the-cli). You can complete both parts or only one part.
 
 ---
 
 ### Deploy using the OpenShift web console
 
-In the first part of the lab you will deploy the [MAX-Object-Detector microservice](https://developer.ibm.com/exchanges/models/all/max-object-detector/) on Red Hat OpenShift using the OpenShift Console UI. This microservice identifies objects in pictures, enabling you to build applications ([like this demo application](https://max-object-detector.max.us-south.containers.appdomain.cloud/app/) - screen capture below) that need to locate objects of interest in images.
+In the first module you deploy the [MAX-Object-Detector microservice](https://developer.ibm.com/exchanges/models/all/max-object-detector/) on Red Hat OpenShift using the OpenShift Console UI. This microservice identifies objects in pictures, enabling you to build applications that need to interpret the content of a picture. For example, a specialized object detection application could be used by a an insurance company to automatically identify visible car damage. 
 
 ![Object Detector sample app teaser](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/od_sample_app.png)
 
-You can find the source code for the microservice in [this GitHub repository](https://github.com/IBM/MAX-Object-Detector) and the demo application source code in [this GitHub repository](https://github.com/IBM/MAX-Object-Detector-Web-App).
+If you are interested in learning more you can find the source code for the microservice in [https://github.com/IBM/MAX-Object-Detector](https://github.com/IBM/MAX-Object-Detector) and the associated demo application source code in [https://github.com/IBM/MAX-Object-Detector-Web-App](https://github.com/IBM/MAX-Object-Detector-Web-App).
 
 #### Open the OpenShift web console 
 
-1. Open https://labs.cognitiveclass.ai/tools/theiaopenshift/. If required, log in.
-
 1. Click **OpenShift Console**. The console opens in a new browser tab, displaying the administrator view.
 
-1. Switch to the **Developer** view.
+   ![Red Hat OpenShift web console default view](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/rhos_web_console_default_view.png)
+
+1. Click the **Administrator** drop down and select the **Developer** view.
 
 #### Deploy the microservice Docker image
 
@@ -64,7 +72,7 @@ You can deploy Docker images that are hosted in public or private registries. Th
 
    ![Select deployment source](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/ui_add_something.png)
 
-1. Select the model-serving Docker image that you want to deploy.
+1. Specify which Docker image you want to deploy.
    1. Select the **Image name from external registry** radio button.
    1. Enter `codait/max-object-detector` as _Image Name_.
 
@@ -143,21 +151,19 @@ You can deploy Docker images that are hosted in public or private registries. Th
 
    ![Test embedded sample application](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/view_od_sample_app.png)
 
-Skip to the [lab summary](#summary) or review the instructions in the next section to learn how to deploy another model-serving microservice using the OpenShift Container Platform CLI.
+This completes the first module. In the next module you will deploy another model-serving microservice using the OpenShift Container Platform CLI.
 
 ---
 
 ### Deploy using the CLI
 
-In this section you will deploy the [image caption generator deep learning microservice](https://developer.ibm.com/exchanges/models/all/max-image-caption-generator/) on Red Hat OpenShift using the OpenShift Container Platform CLI (`oc`). This microservice analyzes the content of a picture and generates captions that describe the image, enabling you to build applications ([like this demo application](http://max-image-caption-generator-web-app.mybluemix.net/) - screen capture below) that automatically annotate user-provided content.
+In this module you will deploy the [image caption generator deep learning microservice](https://developer.ibm.com/exchanges/models/all/max-image-caption-generator/) on Red Hat OpenShift using the OpenShift Container Platform CLI (`oc`). This microservice analyzes the content of a picture and generates captions that describe the image, enabling you to build applications ([like this demo application](http://max-image-caption-generator-web-app.mybluemix.net/) - screen capture below) that automatically annotate user-provided content.
 
 ![Image Caption Generator sample app teaser](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/img_caption_sample_app.png)
 
 You can find the source code for the microservice in [this GitHub repository](https://github.com/IBM/MAX-Image-Caption-Generator) and the demo application source code in [this GitHub repository](https://github.com/IBM/MAX-Image-Caption-Generator-Web-App).
 
 #### Setup
-
-1. Open https://labs.cognitiveclass.ai/tools/theiaopenshift/. If required, log in.
 
 1. Open a new terminal window (**Terminal** > **New Terminal**).
 
