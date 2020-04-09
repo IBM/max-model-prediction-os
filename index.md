@@ -38,11 +38,11 @@ It should take you approximately 20 minutes to complete this lab. The lab module
 
 1. Clone the lab repository by running the following command in the terminal window.
    ```
-   $ git clone https://github.com/IBM/max-model-prediction-os.git
-   $ cd max-model-prediction-os
+   git clone https://github.com/IBM/max-model-prediction-os.git
+   cd max-model-prediction-os
    ```
 
-   The cloned repository contains sample images and a few utility scripts.
+   The cloned repository contains sample images and utility scripts.
 
 You are ready to start the lab.
 
@@ -50,19 +50,23 @@ You are ready to start the lab.
 
 ### Deploy using the OpenShift web console
 
-In the first module you deploy the [MAX-Object-Detector microservice](https://developer.ibm.com/exchanges/models/all/max-object-detector/) on Red Hat OpenShift using the OpenShift Console UI. This microservice identifies objects in pictures, enabling you to build applications that need to interpret the content of a picture. For example, a specialized object detection application could be used by a an insurance company to automatically identify visible car damage. 
+In the first module you deploy the [MAX-Object-Detector microservice](https://developer.ibm.com/exchanges/models/all/max-object-detector/) on Red Hat OpenShift using the OpenShift web console. This microservice identifies objects in pictures, enabling you to build applications that need to interpret the content of a picture. 
 
 ![Object Detector sample app teaser](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/od_sample_app.png)
 
-If you are interested in learning more you can find the source code for the microservice in [https://github.com/IBM/MAX-Object-Detector](https://github.com/IBM/MAX-Object-Detector) and the associated demo application source code in [https://github.com/IBM/MAX-Object-Detector-Web-App](https://github.com/IBM/MAX-Object-Detector-Web-App).
+If you are interested in learning more about the microservice you can find the source code in [https://github.com/IBM/MAX-Object-Detector](https://github.com/IBM/MAX-Object-Detector) and the demo web application source code in [https://github.com/IBM/MAX-Object-Detector-Web-App](https://github.com/IBM/MAX-Object-Detector-Web-App).
 
 #### Open the OpenShift web console 
 
-1. Click **OpenShift Console**. The console opens in a new browser tab, displaying the administrator view.
+1. Click **OpenShift Console**. 
+
+   ![Open OpenShift console](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/open_rhos_web_console.png)
+
+   The console opens in a new browser tab and the _developer_ view is displayed. OpenShift organizes related resources in projects. In the lab environment you are using a project named `sn-labs-...` that was automatically created for you.
 
    ![Red Hat OpenShift web console default view](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/rhos_web_console_default_view.png)
 
-1. Click the **Administrator** drop down and select the **Developer** view.
+   You are ready to deploy the Object Detector microservice.
 
 #### Deploy the microservice Docker image
 
@@ -72,13 +76,13 @@ You can deploy Docker images that are hosted in public or private registries. Th
 
    ![Select deployment source](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/ui_add_something.png)
 
-1. Specify which Docker image you want to deploy.
-   1. Select the **Image name from external registry** radio button.
-   1. Enter `codait/max-object-detector` as _Image Name_.
+1. Select the **Image name from external registry** radio button.
 
-       ![Select Docker image](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/ui_select_source_image.png)
+1. Enter `codait/max-object-detector` as _Image Name_.
 
-   1. Click on the magnifying glass next to the image name (or press Enter) to load the Docker image's metadata.
+   ![Select Docker image](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/ui_select_source_image.png)
+
+1. Click on the magnifying glass next to the image name (or press Enter) to load the Docker image's metadata.
 
 1. Review the deployment configuration for the Docker image.
 
@@ -114,7 +118,7 @@ You can deploy Docker images that are hosted in public or private registries. Th
 
    You can customize the behavior of the deployed microservice by setting environment variables. For example, you can enable [Cross-Origin Resource Sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) support by setting the `CORS_ENABLE` variable in the deployment configuration to `true`. If CORS is enabled (which it is not by default) client applications that run in a web browser can call the microservice endpoints.
 
-1. Click the **Scaling** link to configure how many copies of the deployed microservice you want to run. In this lab the default setting of 1 is sufficient because there are no other applications or services deployed that utilize this service.
+1. Click the **Scaling** link to configure how many copies of the deployed microservice you want to run. In this lab the default setting of 1 is sufficient because you are the only user who will utilize this service.
 
    ![Configure scaling](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/ui_configure_scaling.png)
 
@@ -126,7 +130,7 @@ You can deploy Docker images that are hosted in public or private registries. Th
 
    ![View deployment topology](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/ui_view_deployment_topology.png)
 
-1. Click the **max-object-detector** label (marked with a dashed arrow in the screen capture) to open the deployment overview panel.
+1. Click the **max-object-detector** label (marked with a dashed arrow in the screen capture) to open the deployment configuration panel.
 
    ![View deployment](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/ui_view_deployment.png)
 
@@ -134,7 +138,7 @@ You can deploy Docker images that are hosted in public or private registries. Th
 
    ![View deployment resources](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/ui_view_deployment_resources.png)
 
-1. Open the displayed URL to access the microservice's OpenAPI specification.
+1. Open the displayed route URL to access the microservice's OpenAPI specification, which documents the endpoints applications and services can call to utilize the microservice.
 
    ![Review OpenAPI specification](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/view_od_openapi_spec.png)
 
@@ -143,11 +147,23 @@ You can deploy Docker images that are hosted in public or private registries. Th
    - the `GET /model/labels` endpoint, which identifies the kinds of objects the microservice can detect in an image
    - the `POST /model/predict` endpoint, which detects objects in an image that is included in the payload when the endpoint is invoked 
 
-   You can try these endpoints by clicking on their name.
-
    ![Review object detector endpoints](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/view_od_endpoints.png)
 
-1. The Object Detector microservice includes a small demo application that illustrates how a web application can consume the `/model/predict` endpoint. Open the embedded sample application by appending `/app` to the URL displayed in your browser, and test the microservice by analyzing an image of your choice.
+   You can try the endpoints by clicking on the name.
+
+1. Click `GET /model/labels`, **Try it out**, and **Execute** to retrieve the list of objects that the microservice can detect in an image.
+
+   ![Invoke the labels endpoint](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/view_od_labels_endpoint.png)
+
+   The response should look as follows and includes how many types of objects can be detected and what they are.
+
+   ![View labels endpoint response](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/view_od_labels_endpoint_response.png)
+
+   The Object Detector microservice includes a small embedded demo application that illustrates how a web application can consume the `/model/predict` endpoint. 
+
+1. Open the embedded sample application by appending `/app` to the public route of your deployed microservice, e.g. `http://max-object-detector-sn-labs-.../app`.
+
+1. Test the microservice by selecting an image of your choice and changing the probability threshold. By lowering the threshold you can see objects that the Object Detector deep learning model is less certain about.
 
    ![Test embedded sample application](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/view_od_sample_app.png)
 
@@ -157,35 +173,43 @@ This completes the first module. In the next module you will deploy another mode
 
 ### Deploy using the CLI
 
-In this module you will deploy the [image caption generator deep learning microservice](https://developer.ibm.com/exchanges/models/all/max-image-caption-generator/) on Red Hat OpenShift using the OpenShift Container Platform CLI (`oc`). This microservice analyzes the content of a picture and generates captions that describe the image, enabling you to build applications ([like this demo application](http://max-image-caption-generator-web-app.mybluemix.net/) - screen capture below) that automatically annotate user-provided content.
+In this second module you deploy the [image caption generator deep learning microservice](https://developer.ibm.com/exchanges/models/all/max-image-caption-generator/) on Red Hat OpenShift using the OpenShift Container Platform CLI.
+
+This microservice analyzes the content of an image and generates a one sentence description, which is useful if an application or service needs to automatically annotate user-provided content.
 
 ![Image Caption Generator sample app teaser](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/img_caption_sample_app.png)
 
-You can find the source code for the microservice in [this GitHub repository](https://github.com/IBM/MAX-Image-Caption-Generator) and the demo application source code in [this GitHub repository](https://github.com/IBM/MAX-Image-Caption-Generator-Web-App).
+If you are interested in learning more about the microservice you can find the source code in [https://github.com/IBM/MAX-Image-Caption-Generator](https://github.com/IBM/MAX-Image-Caption-Generator) and the demo web application source code in [https://github.com/IBM/MAX-Image-Caption-Generator-Web-App](https://github.com/IBM/MAX-Image-Caption-Generator-Web-App).
 
 #### Setup
 
 1. Open a new terminal window (**Terminal** > **New Terminal**).
 
-   The OpenShift Container Platform CLI is pre-installed and pre-configured in the Skills Network Labs _Theia - Cloud IDE (With OpenShift)_ environment. 
+   The OpenShift Container Platform CLI `oc` is pre-installed and pre-configured in the Skills Network Labs _Theia - Cloud IDE (With OpenShift)_ environment. 
 
    ![Skills Network Labs view](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/skills_network_labs_terminal_view.png)
 
-1. Run the `oc version` command to verify that you can access the client.
+1. Verify that you can access the CLI in your terminal.
  
    ```
-   $ oc version
+   oc version
+   ```
+
+   If the client is properly configured the output is similar to this:
+
+   ```
     client Version: 4.5.0-202002280431-79259a8
     Kubernetes Version: v1.16.2
    ```
 
-1. OpenShift uses projects to organize related resources. In the sandbox evironment you are using today a project was automatically created for you. Run the `oc projects` command to display the current project.
+1. As you learned in the first module, OpenShift uses projects to organize related resources. Display the current project.
 
    ```
-   $ oc projects
-    You have one project on this server: "sn-labs-...".
-    Using project "sn-labs-..." from context ...
+   oc projects
    ```
+
+   Your current project should be "sn-labs-...".
+
 
 #### Deploy the image caption generator microservice Docker image
 
@@ -194,10 +218,11 @@ You can deploy Docker images that are hosted in public registries, such as Docke
 1. Verify that OpenShift can locate the public [`codait/max-image-caption-generator` Docker image on Docker Hub](https://hub.docker.com/r/codait/max-image-caption-generator).
 
    ```
-   $ oc new-app --search codait/max-image-caption-generator
+   oc new-app --search codait/max-image-caption-generator
    ```
 
-   The output should look as follows:
+   The output should indicate that the Docker image was found in the public Docker Hub registry:
+
    ```
     Docker images (oc new-app --docker-image=<docker-image> [--code=<source>])
     -----
@@ -209,7 +234,7 @@ You can deploy Docker images that are hosted in public registries, such as Docke
 1. Deploy the Docker image on OpenShift.
 
    ```
-   $ oc new-app codait/max-image-caption-generator
+   oc new-app codait/max-image-caption-generator
    ```
 
    Review the output and note that the image name `max-image-caption-generator` is used by default to name the generated resources, such as the image stream, the deployment configuration, the service, and the host.
@@ -238,19 +263,18 @@ You can deploy Docker images that are hosted in public registries, such as Docke
 1. You can customize the behavior of most model-serving microservices by setting environment variables. For example, you can enable [Cross-Origin Resource Sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) support by setting the `CORS_ENABLE` variable in the deployment configuration to `true`:
 
    ```
-   $ oc set env deploymentconfig max-image-caption-generator CORS_ENABLE=true
-     deploymentconfig.apps.openshift.io/max-image-caption-generator updated
+   oc set env deploymentconfig max-image-caption-generator CORS_ENABLE=true
    ```
 
-   Refer to the model documentation for model-specific environment settings.
+   With CORS enabled applications running in a web browser can now take utilize the microservice.
 
-1. Run `oc status` to query the deployment status.
+1. Query the deployment status.
 
    ```
-   $ oc status
+   oc status
    ```
 
-   After deployment completed one microservice instance is running. Note though that it is only visible internally (at port 5000) to the cluster and cannot yet be accessed by applications running elsewhere:
+   After deployment completed one microservice instance is running. Note though that it is only visible internally (at port 5000) to the cluster and cannot yet be accessed by applications running elsewhere as indicated in the response:
 
    ```
    In project sn-labs-... on server https://...
@@ -270,16 +294,15 @@ You can deploy Docker images that are hosted in public registries, such as Docke
 
 When you [create a route](https://docs.openshift.com/container-platform/4.3/dev_guide/routes.html) in OpenShift, you have the option to expose an unsecured or a secured route. Because the model-serving miroservice communicates over HTTP, you can configure the router to expose an unsecured HTTP connection (which is what you'll do in this lab) or expose a secured HTTP connection, which the OpenShift router automatically terminates.
 
-1. Create a route for the service using `oc expose service`.
+1. Create a route for the service.
    ```
-   $ oc expose service max-image-caption-generator
-     route.route.openshift.io/max-image-caption-generator exposed
+   oc expose service max-image-caption-generator
    ```
 
-1. Retrieve the microservice's public URL using `oc get route`.
+1. Retrieve the microservice's public URL.
 
    ```
-   $ oc get route max-image-caption-generator
+   oc get route max-image-caption-generator
    ```   
 
    Under the `HOST/PORT` column, the generated host name is displayed.
@@ -296,11 +319,12 @@ When you [create a route](https://docs.openshift.com/container-platform/4.3/dev_
 1. Run `scripts/get_model_url.sh`, passing the deployed service's name `max-image-caption-generator` as parameter.
 
    ```
-   $ ./scripts/get_model_url.sh max-image-caption-generator
-     http://max-image-caption-generator-sn-...
+   ./scripts/get_model_url.sh max-image-caption-generator
    ```
 
-1. Open the displayed URL `http://max-image-caption-generator-sn-...` in your web browser and review the microservice OpenAPI specification, which documents the public endpoints that applications and service can utilize.
+   If the service is accessible on a public route the URL is displayed.
+
+1. Open the route URL `http://max-image-caption-generator-sn-...` in your web browser and review the microservice's OpenAPI specification, which documents the public endpoints that applications and service can utilize.
 
    ![Review OpenAPI specification](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/review_imgcap_openapi_spec.png)
 
@@ -343,14 +367,13 @@ When you [create a route](https://docs.openshift.com/container-platform/4.3/dev_
    1. Run `scripts/get_model_prediction_endpoint.sh` passing the service's name `max-image-caption-generator` as parameter to retrieve the microservice's prediction endpoint.
 
       ```
-      $ ./scripts/get_model_prediction_endpoint.sh max-image-caption-generator 
-       http://max-image-.../model/predict
+      ./scripts/get_model_prediction_endpoint.sh max-image-caption-generator 
       ```
 
    1. Use cURL to send a picture to the displayed endpoint.
 
       ```
-      $ curl -F "image=@samples/surfing.jpg" -X POST http://max-image-.../model/predict
+      curl -F "image=@samples/surfing.jpg" -X POST http://max-image-.../model/predict
       ```
 
       The JSON response includes up to three captions that describe the image content.
