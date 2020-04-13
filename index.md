@@ -138,7 +138,7 @@ You can deploy Docker images that are hosted in public or private registries. Th
 
    ![View deployment resources](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/ui_view_deployment_resources.png)
 
-1. Open the displayed route URL to access the microservice's OpenAPI specification, which documents the endpoints applications and services can call to utilize the microservice.
+1. Open the displayed route URL to access the microservice's OpenAPI specification, which documents the REST API endpoints applications and services can call to utilize the microservice.
 
    ![Review OpenAPI specification](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/view_od_openapi_spec.png)
 
@@ -324,7 +324,7 @@ When you [create a route](https://docs.openshift.com/container-platform/4.3/dev_
 
    If the service is accessible on a public route the URL is displayed.
 
-1. Open the route URL `http://max-image-caption-generator-sn-...` in your web browser and review the microservice's OpenAPI specification, which documents the public endpoints that applications and service can utilize.
+1. Open the route URL `http://max-image-caption-generator-sn-...` in your web browser and review the microservice's OpenAPI specification, which documents the public REST API endpoints that applications and service can utilize.
 
    ![Review OpenAPI specification](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/review_imgcap_openapi_spec.png)
 
