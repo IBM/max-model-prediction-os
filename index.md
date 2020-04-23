@@ -47,13 +47,19 @@ If you are interested in learning more about the microservice you can find the s
 
    ![Open OpenShift console](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/open_rhos_web_console.png)
 
-   The console opens in a new browser tab and the _developer_ view is displayed. OpenShift organizes related resources in projects. In the lab environment you are using a project named `sn-labs-...` that was automatically created for you.
+   The console opens in a new browser tab.
+   
+1. If the _Administrator_ view is displayed by default, switch to the _Developer_ view.
 
-   ![Red Hat OpenShift web console default view](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/rhos_web_console_default_view.png)
+   ![Red Hat OpenShift web console administrator view](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/rhos_web_console_admin_view.png) 
+
+    OpenShift organizes related resources in projects. In the lab environment you are using a project named `sn-labs-...` that was automatically created for you.
+
+   ![Red Hat OpenShift web console default view](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/rhos_web_console_developer_view.png)
 
    You are ready to deploy the Object Detector microservice.
 
-#### Deploy the microservice Docker image
+#### Deploy the Object Detector microservice Docker image
 
 You can deploy Docker images that are hosted in public or private registries. The MAX-Object-Detector Docker image `codait/max-object-detector` is hosted on [Docker Hub](https://hub.docker.com/r/codait/max-object-detector), which is a public registry.
 
