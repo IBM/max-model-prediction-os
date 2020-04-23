@@ -121,13 +121,15 @@ You can deploy Docker images that are hosted in public or private registries. Th
 
    ![View deployment topology](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/ui_view_deployment_topology.png)
 
-1. Click the **max-object-detector** label (marked with a dashed arrow in the screen capture) to open the deployment configuration panel.
+1. Click the **max-object-detector** deployment label (marked with a dashed arrow in the screen capture) to open the deployment configuration panel.
 
    ![View deployment](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/ui_view_deployment.png)
 
-1. Select the **Resources** tab, which provides you with access to the log files and a link to the public route. 
+1. Select the **Resources** tab, which provides you with access to the log files and a link to the microservice's public route. 
 
    ![View deployment resources](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/ui_view_deployment_resources.png)
+
+1. Before proceeding make sure the pod status is _running_, as shown in the screen capture above.
 
 1. Open the displayed route URL to access the microservice's OpenAPI specification, which documents the REST API endpoints applications and services can call to utilize the microservice.
 
