@@ -15,6 +15,10 @@ By completing this quick lab, you will learn how to use the OpenShift web consol
 
 For illustrative purposes you will deploy the Object Detector microservice using the OpenShift Web Console and the Image Caption Generator microservice using the OpenShift Platform CLI. 
 
+## Before you get started
+
+Throughout this document you will find links to additional resources. These links open by default in the Skills Network Labs browser window. If you are interested in reviewing these resources we therefore suggest to open the links in a separate tab or window.
+
 ## Lab setup
 
 1. Open a new terminal window (**Terminal** > **New Terminal**).
