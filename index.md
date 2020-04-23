@@ -2,35 +2,20 @@
 
 Data contains a wealth of information that can be used to solve certain types of problems. Traditional data analysis approaches, like a person manually inspecting the data or a specialized computer program that automates the human analysis, quickly reach their limits due to the amount of data to be analyzed or the complexity of the problem.
 
-Machine learning, and deep learning, which is a specialized type of machine learning, uses algorithms – also known as ”models” - to identify patterns in the data. A trained model can be used to make predictions or decisions, and solve problems such as analyzing the content of text (spoken and written), images, audio, and video. For example, a model can be trained to identify objects in an image, sounds in a an audio or video file or summarize the the content in text form.
+Machine learning, and deep learning, which is a specialized type of machine learning, uses algorithms – also known as ”models” - to identify patterns in the data. A trained model can be used to make predictions or decisions, and solve problems such as analyzing the content of text (spoken and written), images, audio, and video. For example, a model can be trained to identify objects in an image, sounds in an audio or video file or summarize the the content in text form.
 
 ![Identifying objects in an image using deep learning](https://github.com/IBM/max-model-prediction-os/raw/master/doc/images/deep_learning_example.png)
 
 The [Model Asset Exchange](https://developer.ibm.com/series/create-model-asset-exchange/) is a curated repository of ready-to-use state-of-the-art free and open source deep learning models, which can be deployed as microservice Docker images in local, hybrid, or cloud environments.
 
-By completing this quick lab, you learn how to use the OpenShift web console or OpenShift Container Platform command-line interface to:
+By completing this quick lab, you will learn how to use the OpenShift web console or OpenShift Container Platform command-line interface to:
 
 * Deploy a model-serving microservice using a public container image on Docker Hub
 * Create a route that exposes the microservice to the public
 
-For illustrative purposes you will deploy the Object Detector microservice and the Image Caption Generator microservice. 
-
-## Prerequisites
-
-To follow this lab, you must have:
-
-* A web browser that is supported by the Skills Network Labs, such as the latest versions of Mozilla FireFox or Chrome.
-
-## Estimated time
-
-It should take you approximately 20 minutes to complete this lab. The lab modules are:
-
-* [Deploy using the OpenShift Web Console](#deploy-using-the-openshift-web-console)
-* [Deploy using the OpenShift Platform CLI](#deploy-using-the-cli)
+For illustrative purposes you will deploy the Object Detector microservice using the OpenShift Web Console and the Image Caption Generator microservice using the OpenShift Platform CLI. 
 
 ## Lab setup
-
-1. Connect to the [Skills Network Labs environment](https://labs.cognitiveclass.ai/tools/theiaopenshift/?md_instructions_url=https://raw.githubusercontent.com/IBM/max-model-prediction-os/master/index.md) using your web browser. If required, log in.
 
 1. Open a new terminal window (**Terminal** > **New Terminal**).
 
